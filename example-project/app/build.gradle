@@ -14,6 +14,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
+dependencies {
+    implementation 'info.picocli:picocli:4.7.0'
+    annotationProcessor 'info.picocli:picocli-codegen:4.7.0'
+}
 
 application {
     mainClass = 'hexlet.code.App'
@@ -21,6 +25,9 @@ application {
 
 compileJava {
     options.release = 17
+    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+
+
 }
 
 test {
