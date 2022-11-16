@@ -12,7 +12,8 @@ import static hexlet.code.ItemFromFiles.UNCHANGED;
 import static hexlet.code.ItemFromFiles.CHANGED;
 
 public class Differences {
-    public static Map<String, ItemFromFiles> getDiff(Map<String, Object> dataFromFirstFile, Map<String, Object> dataFromSecondFile) {
+    public static Map<String, ItemFromFiles> getDiff(
+            Map<String, Object> dataFromFirstFile, Map<String, Object> dataFromSecondFile) {
         Map<String, ItemFromFiles> differ = new TreeMap<>();
 
         Set<String> allKeys= new TreeSet<>();
