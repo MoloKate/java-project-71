@@ -1,35 +1,63 @@
 plugins {
-    id 'java'
+    // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
-group 'hexlet.code'
-version '1.0-SNAPSHOT'
-
 repositories {
+    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
-dependencies {
-    implementation 'info.picocli:picocli:4.7.0'
-    annotationProcessor 'info.picocli:picocli-codegen:4.7.0'
+    testImplementation group: 'org.skyscreamer', name: 'jsonassert', version: '1.5.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'info.picocli:picocli:4.6.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
+    implementation 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    implementation 'com.puppycrawl.tools:checkstyle:10.3.4'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4'
+
 }
 
 application {
+    // Define the main class for the application.
     mainClass = 'hexlet.code.App'
+}
+
+group = 'hexlet.code'
+version = '1.0.3-SNAPSHOT'
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
 }
 
 compileJava {
     options.release = 17
-    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
-
-
 }
 
 test {
     useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+}
+testlogger {
+    showStandardStreams true
 }

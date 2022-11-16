@@ -1,37 +1,40 @@
 package hexlet.code;
 
 import picocli.CommandLine;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
+import java.util.concurrent.Callable;
 
-public class App {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-        new CommandLine(new Help()).execute(args);
-    }
+@CommandLine.Command(name = "getDiff", mixinStandardHelpOptions = true, version = "getDiff 1.0",
+        description = "Compares two configuration files and shows a difference.")
 
-}
+public class App implements Callable<Integer> {
+    private final Integer errorCode = 404;
+    @CommandLine.Parameters(index = "0", description = "path to first file")
+    private String firstFilePath;
+    @CommandLine.Parameters(index = "1", description = "path to second file")
+    private String secondFilePath;
 
-@Command(mixinStandardHelpOptions = true, version = "help 1.0",
-        description = """
-                Usage: gendiff [-hV] [-f=format] filepath1 filepath2
-                Compares two configuration files and shows a difference.
-                      filepath1         path to first file
-                      filepath2         path to second file""")
-class Help implements Runnable {
-
-    @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
-    boolean versionInfoRequested;
-
-    @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
-    boolean usageHelpRequested;
-
-    @Option(names = {"\b\b\b\b-f", "--format"}, //defaultValue = "stylish",
-            description = "\b\b=format   output format [default: stylish]")
-    boolean value;
+    @CommandLine.Option(names = {"-h", "--help"}, usageHelp = true,
+            description = "Show this help message and exit.")
+    private boolean usageHelpRequested;
+    @CommandLine.Option(names = {"-V", "--version"}, versionHelp = true,
+            description = "Print version information and exit.")
+    private boolean versionInfoRequested;
+    @CommandLine.Option(names = {"-f", "--format"}, defaultValue = "stylish",
+            description = "output format [default: stylish]")
+    private String formatFile;
 
     @Override
-    public void run() {
+    public final Integer call() throws Exception {
+        try {
+            System.out.println(Differ.generate(firstFilePath, secondFilePath, formatFile));
+            return 0;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return errorCode;
+        }
+    }
+    public static void main(String[] args) {
+        int exitCode = new CommandLine(new App()).execute(args);
+        System.exit(exitCode);
     }
 }
-
