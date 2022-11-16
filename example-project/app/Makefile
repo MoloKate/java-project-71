@@ -18,7 +18,7 @@ run:
 test:
 	./gradlew test
 
-report:
+make report:
 	./gradlew jacocoTestReport
 
 lint:
