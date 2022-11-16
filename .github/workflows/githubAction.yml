@@ -21,7 +21,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
-          build-root-directory: app
+          build-root-directory: example-project
 
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v3.1.0
@@ -30,4 +30,4 @@ jobs:
           JACOCO_SOURCE_PATH: app/src/main/java
         with:
           coverageCommand: make report
-          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+          coverageLocations: ${{github.workspace}}example-project/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
