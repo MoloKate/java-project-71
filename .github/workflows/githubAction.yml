@@ -31,4 +31,3 @@ jobs:
         with:
           coverageCommand: make build
           coverageLocations: ${{github.workspace}}/example-project/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
-        options: --unhandled-rejections=strict
