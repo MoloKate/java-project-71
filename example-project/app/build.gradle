@@ -1,5 +1,4 @@
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
     id 'checkstyle'
     id 'jacoco'
@@ -7,7 +6,6 @@ plugins {
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
@@ -25,7 +23,6 @@ dependencies {
 }
 
 application {
-    // Define the main class for the application.
     mainClass = 'hexlet.code.App'
 }
 
@@ -33,7 +30,6 @@ group = 'hexlet.code'
 version = '1.0.3-SNAPSHOT'
 
 tasks.named('test') {
-    // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
 
@@ -46,6 +42,7 @@ test {
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.required = true
     }
@@ -55,9 +52,6 @@ test {
     finalizedBy jacocoTestReport
 }
 
-jacocoTestReport {
-    dependsOn test
-}
 testlogger {
     showStandardStreams true
 }
