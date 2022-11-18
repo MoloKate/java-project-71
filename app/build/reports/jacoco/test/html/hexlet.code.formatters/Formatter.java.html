@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Formatter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">hexlet.code.formatters</a> &gt; <span class="el_source">Formatter.java</span></div><h1>Formatter.java</h1><pre class="source lang-java linenums">package hexlet.code.formatters;
+
+import hexlet.code.ItemFromFiles;
+import java.util.Map;
+
+<span class="nc" id="L6">public class Formatter {</span>
+    public static String getFileFormat(Map&lt;String, ItemFromFiles&gt; differ, String format) throws Exception {
+<span class="pc bpc" id="L8" title="1 of 4 branches missed.">        return switch (format) {</span>
+
+<span class="fc" id="L10">            case &quot;plain&quot; -&gt; Plain.makeFilePlain(differ);</span>
+<span class="fc" id="L11">            case &quot;json&quot; -&gt; Json.makeFileJson(differ);</span>
+<span class="fc" id="L12">            case &quot;stylish&quot; -&gt; Stylish.makeFileStylish(differ);</span>
+<span class="nc" id="L13">            default -&gt; throw new Exception(&quot;Formatting error exception&quot;);</span>
+
+        };
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

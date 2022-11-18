@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">hexlet.code</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package hexlet.code;
+
+import picocli.CommandLine;
+import java.util.concurrent.Callable;
+
+@CommandLine.Command(name = &quot;getDiff&quot;, mixinStandardHelpOptions = true, version = &quot;getDiff 1.0&quot;,
+        description = &quot;Compares two configuration files and shows a difference.&quot;)
+
+<span class="nc" id="L9">public class App implements Callable&lt;Integer&gt; {</span>
+<span class="nc" id="L10">    private final Integer errorCode = 404;</span>
+    @CommandLine.Parameters(index = &quot;0&quot;, description = &quot;path to first file&quot;)
+    private String firstFilePath;
+    @CommandLine.Parameters(index = &quot;1&quot;, description = &quot;path to second file&quot;)
+    private String secondFilePath;
+
+    @CommandLine.Option(names = {&quot;-h&quot;, &quot;--help&quot;}, usageHelp = true,
+            description = &quot;Show this help message and exit.&quot;)
+    private boolean usageHelpRequested;
+    @CommandLine.Option(names = {&quot;-V&quot;, &quot;--version&quot;}, versionHelp = true,
+            description = &quot;Print version information and exit.&quot;)
+    private boolean versionInfoRequested;
+    @CommandLine.Option(names = {&quot;-f&quot;, &quot;--format&quot;}, defaultValue = &quot;stylish&quot;,
+            description = &quot;output format [default: stylish]&quot;)
+    private String formatFile;
+
+    @Override
+    public final Integer call() throws Exception {
+        try {
+<span class="nc" id="L29">            System.out.println(Differ.generate(firstFilePath, secondFilePath, formatFile));</span>
+<span class="nc" id="L30">            return 0;</span>
+<span class="nc" id="L31">        } catch (Exception e) {</span>
+<span class="nc" id="L32">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L33">            return errorCode;</span>
+        }
+    }
+    public static void main(String[] args) {
+<span class="nc" id="L37">        int exitCode = new CommandLine(new App()).execute(args);</span>
+<span class="nc" id="L38">        System.exit(exitCode);</span>
+<span class="nc" id="L39">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

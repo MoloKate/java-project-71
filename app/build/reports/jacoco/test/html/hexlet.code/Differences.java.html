@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Differences.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">hexlet.code</a> &gt; <span class="el_source">Differences.java</span></div><h1>Differences.java</h1><pre class="source lang-java linenums">package hexlet.code;
+
+import java.util.Objects;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import static hexlet.code.ItemFromFiles.ADDED;
+import static hexlet.code.ItemFromFiles.DELETED;
+import static hexlet.code.ItemFromFiles.UNCHANGED;
+import static hexlet.code.ItemFromFiles.CHANGED;
+
+<span class="nc" id="L14">public class Differences {</span>
+    public static Map&lt;String, ItemFromFiles&gt; getDiff(
+            Map&lt;String, Object&gt; dataFromFirstFile, Map&lt;String, Object&gt; dataFromSecondFile) {
+<span class="fc" id="L17">        Map&lt;String, ItemFromFiles&gt; differ = new TreeMap&lt;&gt;();</span>
+
+<span class="fc" id="L19">        Set&lt;String&gt; allKeys= new TreeSet&lt;&gt;();</span>
+<span class="fc" id="L20">        allKeys.addAll(dataFromFirstFile.keySet());</span>
+<span class="fc" id="L21">        allKeys.addAll(dataFromSecondFile.keySet());</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for (String key : allKeys) {</span>
+<span class="fc" id="L23">            Object oldValue = dataFromFirstFile.get(key);</span>
+<span class="fc" id="L24">            Object newValue = dataFromSecondFile.get(key);</span>
+
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            if (!dataFromFirstFile.containsKey(key)) {</span>
+<span class="fc" id="L27">                differ.put(key, new ItemFromFiles(newValue, ADDED));</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">            } else if (!dataFromSecondFile.containsKey(key)) {</span>
+<span class="fc" id="L29">                differ.put(key, new ItemFromFiles(oldValue, DELETED));</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">            } else if (Objects.equals(oldValue, newValue)) {</span>
+<span class="fc" id="L31">                differ.put(key, new ItemFromFiles(oldValue, newValue, UNCHANGED));</span>
+            } else {
+<span class="fc" id="L33">                differ.put(key, new ItemFromFiles(oldValue, newValue, CHANGED));</span>
+            }
+<span class="fc" id="L35">        }</span>
+<span class="fc" id="L36">        return differ;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

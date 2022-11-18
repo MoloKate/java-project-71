@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Stylish.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">hexlet.code.formatters</a> &gt; <span class="el_source">Stylish.java</span></div><h1>Stylish.java</h1><pre class="source lang-java linenums">package hexlet.code.formatters;
+
+import hexlet.code.ItemFromFiles;
+import java.util.Map;
+
+import static hexlet.code.ItemFromFiles.ADDED;
+import static hexlet.code.ItemFromFiles.DELETED;
+import static hexlet.code.ItemFromFiles.CHANGED;
+import static hexlet.code.ItemFromFiles.UNCHANGED;
+
+<span class="nc" id="L11">public class Stylish {</span>
+
+    public static String makeFileStylish(Map&lt;String, ItemFromFiles&gt; differ) throws Exception {
+
+<span class="fc" id="L15">        StringBuilder result = new StringBuilder();</span>
+
+<span class="fc" id="L17">        result.append(&quot;{&quot;);</span>
+<span class="fc bfc" id="L18" title="All 2 branches covered.">        for (Map.Entry&lt;String, ItemFromFiles&gt; item : differ.entrySet()) {</span>
+<span class="fc" id="L19">            result.append(&quot;\n&quot;).append(&quot; &quot;.repeat(2));</span>
+<span class="pc bpc" id="L20" title="1 of 5 branches missed.">            switch (item.getValue().getStatus()) {</span>
+                case ADDED:
+<span class="fc" id="L22">                    result.append(&quot;+&quot;).append(&quot; &quot;)</span>
+<span class="fc" id="L23">                            .append(item.getKey()).append(&quot;: &quot;).append(item.getValue().getOldValue());</span>
+<span class="fc" id="L24">                    break;</span>
+                case DELETED:
+<span class="fc" id="L26">                    result.append(&quot;-&quot;).append(&quot; &quot;)</span>
+<span class="fc" id="L27">                            .append(item.getKey()).append(&quot;: &quot;).append(item.getValue().getOldValue());</span>
+<span class="fc" id="L28">                    break;</span>
+                case CHANGED:
+<span class="fc" id="L30">                    result.append(&quot;-&quot;).append(&quot; &quot;)</span>
+<span class="fc" id="L31">                            .append(item.getKey()).append(&quot;: &quot;).append(item.getValue().getOldValue());</span>
+<span class="fc" id="L32">                    result.append(&quot;\n&quot;).append(&quot; &quot;.repeat(2)).append(&quot;+&quot;).append(&quot; &quot;)</span>
+<span class="fc" id="L33">                            .append(item.getKey()).append(&quot;: &quot;).append(item.getValue().getNewValue());</span>
+<span class="fc" id="L34">                    break;</span>
+                case UNCHANGED:
+<span class="fc" id="L36">                    result.append(&quot; &quot;.repeat(2))</span>
+<span class="fc" id="L37">                            .append(item.getKey()).append(&quot;: &quot;).append(item.getValue().getOldValue());</span>
+<span class="fc" id="L38">                    break;</span>
+                default:
+<span class="nc" id="L40">                    throw new Exception(&quot;Incorrect status: '&quot; + item.getValue().getStatus() + &quot;'&quot;);</span>
+            }
+<span class="fc" id="L42">        }</span>
+<span class="fc" id="L43">        return result.append(&quot;\n}&quot;).toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
