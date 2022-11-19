@@ -16,7 +16,7 @@ public class Differences {
             Map<String, Object> dataFromFirstFile, Map<String, Object> dataFromSecondFile) {
         Map<String, ItemFromFiles> differ = new TreeMap<>();
 
-        Set<String> allKeys= new TreeSet<>();
+        Set<String> allKeys = new TreeSet<>();
         allKeys.addAll(dataFromFirstFile.keySet());
         allKeys.addAll(dataFromSecondFile.keySet());
         for (String key : allKeys) {
