@@ -6,10 +6,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import static hexlet.code.ItemFromFiles.ADDED;
-import static hexlet.code.ItemFromFiles.DELETED;
-import static hexlet.code.ItemFromFiles.UNCHANGED;
-import static hexlet.code.ItemFromFiles.CHANGED;
+import static hexlet.code.ItemFromFiles.STATE;
 
 public class Differences {
     public static Map<String, ItemFromFiles> getDiff(
@@ -24,13 +21,13 @@ public class Differences {
             Object newValue = dataFromSecondFile.get(key);
 
             if (!dataFromFirstFile.containsKey(key)) {
-                differ.put(key, new ItemFromFiles(newValue, ADDED));
+                differ.put(key, new ItemFromFiles(newValue, STATE.added.toString()));
             } else if (!dataFromSecondFile.containsKey(key)) {
-                differ.put(key, new ItemFromFiles(oldValue, DELETED));
+                differ.put(key, new ItemFromFiles(oldValue, STATE.deleted.toString()));
             } else if (Objects.equals(oldValue, newValue)) {
-                differ.put(key, new ItemFromFiles(oldValue, newValue, UNCHANGED));
+                differ.put(key, new ItemFromFiles(oldValue, newValue, STATE.unchanged.toString()));
             } else {
-                differ.put(key, new ItemFromFiles(oldValue, newValue, CHANGED));
+                differ.put(key, new ItemFromFiles(oldValue, newValue, STATE.changed.toString()));
             }
         }
         return differ;

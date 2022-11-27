@@ -1,10 +1,7 @@
 package hexlet.code;
 
 public final class ItemFromFiles {
-    public static final String ADDED = "added";
-    public static final String DELETED = "deleted";
-    public static final String CHANGED = "changed";
-    public static final String UNCHANGED = "unchanged";
+    public enum STATE {added, deleted, changed, unchanged}
     private Object oldValue;
     private Object newValue;
     private String status;
