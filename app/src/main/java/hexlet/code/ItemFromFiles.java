@@ -1,16 +1,16 @@
 package hexlet.code;
 
 public final class ItemFromFiles {
-    public enum STATE {added, deleted, changed, unchanged}
+    public enum FILESTATE {added, deleted, changed, unchanged}
     private Object oldValue;
     private Object newValue;
-    private String status;
-    public ItemFromFiles(Object inputOldValue, Object inputNewValue, String inputStatus) {
+    private FILESTATE status;
+    public ItemFromFiles(Object inputOldValue, Object inputNewValue, FILESTATE inputStatus) {
         this.oldValue = inputOldValue;
         this.newValue = inputNewValue;
         this.status = inputStatus;
     }
-    public ItemFromFiles(Object inputOdValue, String inputStatus) {
+    public ItemFromFiles(Object inputOdValue, FILESTATE inputStatus) {
         this.oldValue = inputOdValue;
         this.status = inputStatus;
         this.newValue = null;
@@ -21,7 +21,7 @@ public final class ItemFromFiles {
     public Object getOldValue() {
         return this.oldValue;
     }
-    public String getStatus() {
+    public FILESTATE getStatus() {
         return this.status;
     }
 }

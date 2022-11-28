@@ -1,12 +1,9 @@
 package hexlet.code.formatters;
 
 import hexlet.code.ItemFromFiles;
+
 import java.util.Map;
 
-import static hexlet.code.ItemFromFiles.ADDED;
-import static hexlet.code.ItemFromFiles.DELETED;
-import static hexlet.code.ItemFromFiles.CHANGED;
-import static hexlet.code.ItemFromFiles.UNCHANGED;
 
 public class Stylish {
 
@@ -18,21 +15,21 @@ public class Stylish {
         for (Map.Entry<String, ItemFromFiles> item : differ.entrySet()) {
             result.append("\n").append(" ".repeat(2));
             switch (item.getValue().getStatus()) {
-                case ADDED:
+                case added:
                     result.append("+").append(" ")
                             .append(item.getKey()).append(": ").append(item.getValue().getOldValue());
                     break;
-                case DELETED:
+                case deleted:
                     result.append("-").append(" ")
                             .append(item.getKey()).append(": ").append(item.getValue().getOldValue());
                     break;
-                case CHANGED:
+                case changed:
                     result.append("-").append(" ")
                             .append(item.getKey()).append(": ").append(item.getValue().getOldValue());
                     result.append("\n").append(" ".repeat(2)).append("+").append(" ")
                             .append(item.getKey()).append(": ").append(item.getValue().getNewValue());
                     break;
-                case UNCHANGED:
+                case unchanged:
                     result.append(" ".repeat(2))
                             .append(item.getKey()).append(": ").append(item.getValue().getOldValue());
                     break;
