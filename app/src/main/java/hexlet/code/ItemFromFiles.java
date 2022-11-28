@@ -1,7 +1,7 @@
 package hexlet.code;
 
 public final class ItemFromFiles {
-    public enum FILESTATE {added, deleted, changed, unchanged}
+    public enum FILESTATE { added, deleted, changed, unchanged }
     private Object oldValue;
     private Object newValue;
     private FILESTATE status;
